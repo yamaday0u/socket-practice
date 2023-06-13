@@ -12,11 +12,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
   });
 });
 
-io.on("connection", (socket) => {
-  console.log("connected");
-});
-
-// require("./event.ts").event(io);
+require("./event.ts").event(io);
 
 httpServer.listen(3000, () => {
   console.log("Chat server listening on port 3000");
