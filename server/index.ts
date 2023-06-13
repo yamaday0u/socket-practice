@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+const config = require("./../environment/config.ts").config;
 
 const app = express();
 const httpServer = createServer(app);
@@ -14,6 +15,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 
 require("./event.ts").event(io);
 
-httpServer.listen(3000, () => {
-  console.log("Chat server listening on port 3000");
+const port = config.port;
+httpServer.listen(port, () => {
+  console.log(`Chat server listening on port ${port}`);
 });
