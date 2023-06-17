@@ -1,21 +1,30 @@
 const readlineSync = require("readline-sync");
-
-const CHECK_CONNECTION = "check connection";
-const JOIN_ROOM = "join room";
-const MESSAGE = "message";
-const actions = [CHECK_CONNECTION, JOIN_ROOM, MESSAGE];
+import { socketActions, CHECK_CONNECTION, JOIN_ROOM, MESSAGE } from "./../environment/config"
 
 export const startCommunication = function(socket: any) {
   const action = selectAction();
-  if (action == CHECK_CONNECTION) checkConnection(socket);
-  else if (action == JOIN_ROOM) joinRoom(socket);
-  else if (action == MESSAGE) message(socket);
-  else console.log("To exit, press Ctrl+C")
+  switch (action) {
+    case CHECK_CONNECTION:
+      checkConnection(socket);
+      break;
+
+    case JOIN_ROOM:
+      joinRoom(socket);
+      break;
+
+    case MESSAGE:
+      message(socket);
+      break;
+
+    default:
+      console.log("To exit, press Ctrl+C");
+      break;
+  }
 }
 
 const selectAction = function() {
-  const index =  readlineSync.keyInSelect(actions, "選択してください > ");
-  return actions[index];
+  const index =  readlineSync.keyInSelect(socketActions, "選択してください > ");
+  return socketActions[index];
 }
 
 const checkConnection = function(socket: any) {
