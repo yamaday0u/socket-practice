@@ -10,30 +10,9 @@ socket.on("connect", () => {
     console.log(`client connected on port ${port}`);
     startCommunication(socket);
   }
-  // startMessaging();
 });
 
 socket.on("receive", (message: string) => {
   console.log(`=> ${message}`);
   startCommunication(socket);
 });
-
-// import readLine from "readline";
-// const readInterface = readLine.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-
-// const startMessaging = () => {
-//   const inputMessage = function() {
-//     readInterface.question(
-//     "> ",
-//     (input: string) => {
-//       socket.emit("client", input, (response: any) => {
-//         inputMessage();
-//       });
-//     });
-//   }
-//   console.log("メッセージを入力してください");
-//   inputMessage();
-// }
