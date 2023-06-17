@@ -5,13 +5,14 @@ export const event = function(io: socketIo.Server) {
   io.on("connect", (socket: socketIo.Socket) => {
     console.log("server connected");
 
-    socket.on("client", (message: string, callback: any) => {
-      console.log("received message: " + message);
-      callback({ status: "OK" });
+    socket.on("check", () => {
+      const checkMessage: string = "connection is OK";
+      console.log(checkMessage)
+      io.emit("result", "connection is OK");
     });
 
     socket.on("join", (roomId: string) => {
-      join(socket, roomId);
+      join(io, socket, roomId);
     });
 
     socket.on("disconnect", () => {

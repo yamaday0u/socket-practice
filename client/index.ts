@@ -8,9 +8,14 @@ const socket = io(`http://localhost:${port}`, { path: "/socket/" });
 socket.on("connect", () => {
   if (socket.connected) {
     console.log(`client connected on port ${port}`);
+    startCommunication(socket);
   }
-  startCommunication(socket);
   // startMessaging();
+});
+
+socket.on("receive", (message: string) => {
+  console.log(`=> ${message}`);
+  startCommunication(socket);
 });
 
 // import readLine from "readline";
@@ -32,5 +37,3 @@ socket.on("connect", () => {
 //   console.log("メッセージを入力してください");
 //   inputMessage();
 // }
-
-socket.emit("join", String(1));
