@@ -7,6 +7,7 @@ export const join = function(io: socketIo.Server, socket: socketIo.Socket, roomI
 }
 
 export const message = function(io: socketIo.Server, data: {roomId: string, message: string}) {
-  console.log(`received message: ${data}`);
-  io.to(data.roomId).emit("receive", `Message { roomId: ${data.roomId}, message: ${data.message} }`);
+  const message = `Message { roomId: ${data.roomId}, message: ${data.message} }`;
+  console.log(message);
+  io.to(data.roomId).emit("receive", message);
 }

@@ -1,17 +1,21 @@
 const readlineSync = require("readline-sync");
 
+const CHECK_CONNECTION = "check connection";
+const JOIN_ROOM = "join room";
+const MESSAGE = "message";
+const actions = [CHECK_CONNECTION, JOIN_ROOM, MESSAGE];
+
 export const startCommunication = function(socket: any) {
-  const option = inputOption();
-  if (option == "check connection") checkConnection(socket);
-  else if (option == "join room") joinRoom(socket);
-  else if (option == "message") message(socket);
+  const action = selectAction();
+  if (action == CHECK_CONNECTION) checkConnection(socket);
+  else if (action == JOIN_ROOM) joinRoom(socket);
+  else if (action == MESSAGE) message(socket);
   else console.log("To exit, press Ctrl+C")
 }
 
-const types = ["check connection", "join room", "message"];
-const inputOption = function() {
-  const index =  readlineSync.keyInSelect(types, "選択してください > ");
-  return types[index];
+const selectAction = function() {
+  const index =  readlineSync.keyInSelect(actions, "選択してください > ");
+  return actions[index];
 }
 
 const checkConnection = function(socket: any) {
