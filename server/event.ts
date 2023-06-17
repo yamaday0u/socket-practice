@@ -2,7 +2,7 @@ import socketIo from "socket.io";
 import { join } from "./events/room";
 
 export const event = function(io: socketIo.Server) {
-  io.on("connect", (socket) => {
+  io.on("connect", (socket: socketIo.Socket) => {
     console.log("server connected");
 
     socket.on("client", (message: string, callback: any) => {
