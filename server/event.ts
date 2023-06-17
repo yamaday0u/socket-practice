@@ -13,5 +13,10 @@ export const event = function(io: socketIo.Server) {
     socket.on("join", (roomId: string) => {
       join(socket, roomId);
     });
+
+    socket.on("disconnect", () => {
+      socket.disconnect;
+      console.log("disconnected");
+    })
   });
 }
